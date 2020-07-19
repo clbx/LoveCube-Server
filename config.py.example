@@ -1,0 +1,4 @@
+sqlCreds = {
+    "user": "user",
+    "pass": "pass"
+}
