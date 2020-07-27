@@ -17,6 +17,30 @@ cur = mydb.cursor()
 cur.execute("USE LoveCube")
 target = "1"
 
+def linespacer(input):
+    #Break at every word to create newlines to keep words together
+    words = input.split()
+    output = ""
+    current = 0
+    for word in words:
+
+        if(len(word) > 8):
+            output += word
+            output += " "
+            current += len(word) - 10
+
+        if(len(word) + current > 8):
+            output += '\n'
+            output += word
+            output += " "
+            current = 0
+        else:
+            output += word
+            output += " "
+            current += len(word)
+
+    print(output)
+
 def getNewestMessage(target):
     print("SELECT Message FROM Messages WHERE TARGET = " + target)
     cur.execute("SELECT Message FROM Messages WHERE TARGET = " + str(target) + " ORDER BY TIMESTAMP DESC LIMIT 1;")
