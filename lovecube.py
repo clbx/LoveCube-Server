@@ -7,7 +7,7 @@ import config as cfg
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 mydb = mysql.connector.connect(
-    host="localhost",
+    host="192.168.1.162",
     user=cfg.sqlCreds["user"],
     password=cfg.sqlCreds["pass"],
     database="LoveCube"
@@ -55,7 +55,7 @@ def home():
 def setMessage():
     token = request.args["token"]
     message = request.args["message"]
-    cur.execute("INSERT INTO Messages (TARGET,MESSAGE,TIMESTAMP) VALUES (" + str(token) +","+ str(message) + ",NOW());")
+    cur.execute("INSERT INTO Messages (TARGET,MESSAGE,TIMESTAMP) VALUES (" + str(token) +",\""+ str(message) + "\",NOW());")
     mydb.commit()
     return "Added Message"
 
@@ -66,4 +66,4 @@ def getMessage():
         return getNewestMessage(token)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0)
